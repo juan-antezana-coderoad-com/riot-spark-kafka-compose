@@ -15,6 +15,27 @@ The image is available directly from https://registry.hub.docker.com/
 - modify the ```KAFKA_ADVERTISED_HOST_NAME``` in ```docker-compose.yml``` to match your docker host IP (Note: Do not use localhost or 127.0.0.1 as the host ip if you want to run multiple brokers.)
 - if you want to customise any Kafka parameters, simply add them as environment variables in ```docker-compose.yml```, e.g. in order to increase the ```message.max.bytes``` parameter set the environment to ```KAFKA_MESSAGE_MAX_BYTES: 2000000```. To turn off automatic topic creation set ```KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'```
 
+##Installation (or: 2 steps to IoT glory)
+1. Copy .env-sample as .env. This file contains all configuration needed to run ViZix:
+
+   ```bash
+   $ cp .env-sample .env
+   ```
+
+2. Edit the .env configuration file with the proper ViZix versions, memory settings and credentials:
+
+   (regarding memory settings, it's important to set `MAX_MEMORY` and `MIN_MEMORY` to use no more than 50% of the host machine's available memory)
+
+   ```shell
+   #VIZIX Versions:
+   KAFKA=wurstmeister/zookeeper
+   PUBLIC_ADDRESS=10.100.0.67
+
+   #VIZIX Services memory settings (expressed in megabytes)
+   MAX_MEMORY=2048m
+   MIN_MEMORY=1024m
+   ```
+
 ##Usage
 
 Start a cluster:
